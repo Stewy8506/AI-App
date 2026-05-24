@@ -21,7 +21,6 @@ if (!fs.existsSync(uvicornPath)) {
 console.log('\x1b[34m%s\x1b[0m', '📡 [System] Starting FastAPI Backend on port 8000...');
 const backend = spawn(uvicornPath, ['app.main:app', '--reload', '--port', '8000'], {
   cwd: backendDir,
-  shell: true,
 });
 
 // Helper to format output
@@ -43,10 +42,11 @@ backend.on('close', (code) => {
 });
 
 // 2. Spawning Frontend (Next.js)
-console.log('\x1b[34m%s\x1b[0m', '🎨 [System] Starting Next.js Frontend on port 3000...');
+console.log('\x1b[34m%s\x1b[0m', '🎨 [System] Starting Next.js Frontend on port 5000...');
 const frontend = spawn('npm', ['run', 'dev'], {
   cwd: frontendDir,
   shell: true,
+  env: { ...process.env, PORT: '5000' }
 });
 
 frontend.stdout.on('data', (data) => logData('[Frontend]', '\x1b[36m', data)); // Cyan

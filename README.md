@@ -86,7 +86,7 @@ npm run dev:all
 
 This custom runner automatically:
 1. Spawns the **FastAPI Backend** (`http://localhost:8000`) using the virtual environment's internal executables.
-2. Spawns the **Next.js Frontend** (`http://localhost:3000`).
+2. Spawns the **Next.js Frontend** (`http://localhost:5000`).
 3. Formats and color-codes console logs into a single window.
 4. Cleanly handles graceful shutdown of both services upon pressing `Ctrl + C`.
 
@@ -116,7 +116,7 @@ cd frontend
 npm run dev
 ```
 
-Your web client will be available at **`http://localhost:3000`**.
+Your web client will be available at **`http://localhost:5000`**.
 
 ---
 

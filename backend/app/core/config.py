@@ -15,6 +15,6 @@ class Settings(BaseSettings):
     # DB
     DATABASE_URL: str = "sqlite:///./workspace.db"
 
-    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
+    model_config = SettingsConfigDict(env_file=(".env", ".env.local"), case_sensitive=True)
 
 settings = Settings()
