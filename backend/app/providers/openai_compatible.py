@@ -63,3 +63,15 @@ class OpenAICompatibleProvider(BaseProvider):
                                 yield content
                         except json.JSONDecodeError:
                             continue
+
+    async def get_models(self) -> List[str]:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"{self.base_url}/models",
+                headers=self._get_headers(),
+                timeout=10.0
+            )
+            response.raise_for_status()
+            data = response.json()
+            return [model["id"] for model in data.get("data", [])]
+

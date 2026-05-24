@@ -15,3 +15,9 @@ class BaseProvider(ABC):
     async def stream(self, messages: List[Dict[str, Any]], model: str, **kwargs) -> AsyncGenerator[str, None]:
         """Stream the response back as an async generator."""
         pass
+
+    @abstractmethod
+    async def get_models(self) -> List[str]:
+        """Fetch available models for the provider."""
+        pass
+

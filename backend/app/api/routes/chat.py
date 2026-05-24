@@ -46,3 +46,20 @@ async def chat_completions(request: ChatRequest, req: Request):
             }
 
     return EventSourceResponse(event_generator())
+
+@router.get("/models")
+async def get_models(provider: str):
+    try:
+        provider_instance = ProviderRegistry.get_provider(provider)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+        
+    if not provider_instance:
+        raise HTTPException(status_code=400, detail="Provider not found")
+        
+    try:
+        models = await provider_instance.get_models()
+        return {"models": models}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
